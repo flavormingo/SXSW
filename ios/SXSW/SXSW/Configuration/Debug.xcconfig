@@ -1,0 +1,8 @@
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+// Debug Configuration
+API_BASE_URL = http:/$()/localhost:3000
+SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG
+GCC_OPTIMIZATION_LEVEL = 0
+ENABLE_TESTABILITY = YES

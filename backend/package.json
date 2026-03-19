@@ -1,0 +1,45 @@
+{
+  "name": "@sxsw/backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc && tsc-alias",
+    "start": "node dist/index.js",
+    "start:worker": "node dist/workers/scheduler.js",
+    "lint": "eslint src/ --ext .ts",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:seed": "tsx src/db/seed.ts",
+    "db:studio": "drizzle-kit studio"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.12.0",
+    "@hono/zod-validator": "^0.4.0",
+    "@neondatabase/serverless": "^1.0.0",
+    "@node-rs/argon2": "^1.8.0",
+    "better-auth": "^1.2.0",
+    "cheerio": "^1.0.0",
+    "cron": "^3.1.0",
+    "dotenv": "^16.4.0",
+    "drizzle-orm": "^0.45.1",
+    "hono": "^4.5.0",
+    "pino": "^9.3.0",
+    "pino-pretty": "^11.2.0",
+    "resend": "^4.0.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "drizzle-kit": "^0.28.0",
+    "eslint": "^9.7.0",
+    "tsc-alias": "^1.8.0",
+    "tsx": "^4.16.0",
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
+  }
+}

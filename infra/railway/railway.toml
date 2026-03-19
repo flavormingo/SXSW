@@ -1,0 +1,14 @@
+[build]
+builder = "nixpacks"
+buildCommand = "cd backend && npm ci && npm run build"
+
+[deploy]
+startCommand = "cd backend && npm start"
+healthcheckPath = "/health"
+healthcheckTimeout = 10
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 5
+numReplicas = 2
+
+[service]
+internalPort = 3000
