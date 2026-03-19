@@ -25,7 +25,7 @@ struct MapView: View {
                                 Task { await viewModel.selectVenue(venue) }
                             } label: {
                                 Image(systemName: "mappin.circle.fill")
-                                    .font(.title)
+                                    .font(.sxswTitle)
                                     .foregroundStyle(.sxswOrange)
                                     .background(
                                         Circle()
@@ -65,15 +65,15 @@ struct VenueDetailSheet: View {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(venue.name)
-                        .font(.headline)
+                        .font(.sxswHeadlineDefault)
                     if let address = venue.address {
                         Text(address)
-                            .font(.caption)
+                            .font(.sxswDetail)
                             .foregroundStyle(.secondary)
                     }
                     if let neighborhood = venue.neighborhood {
                         Text(neighborhood)
-                            .font(.caption2)
+                            .font(.sxswDetailSmall)
                             .foregroundStyle(.secondary)
                     }
                 }
@@ -85,7 +85,7 @@ struct VenueDetailSheet: View {
                     viewModel.selectedVenue = nil
                 } label: {
                     Image(systemName: "xmark.circle.fill")
-                        .font(.title3)
+                        .font(.sxswTitle3)
                         .foregroundStyle(.secondary)
                 }
             }
@@ -94,24 +94,24 @@ struct VenueDetailSheet: View {
                 Divider()
 
                 Text("Upcoming Events")
-                    .font(.subheadline)
+                    .font(.sxswBodyDefault)
                     .fontWeight(.semibold)
 
                 ForEach(events.prefix(3)) { event in
                     HStack {
                         VStack(alignment: .leading, spacing: 2) {
                             Text(event.title)
-                                .font(.caption)
+                                .font(.sxswDetail)
                                 .fontWeight(.medium)
                                 .lineLimit(1)
                             Text(event.formattedTimeRange)
-                                .font(.caption2)
+                                .font(.sxswDetailSmall)
                                 .foregroundStyle(.secondary)
                         }
                         Spacer()
                         if event.isHappeningNow {
                             Text("LIVE")
-                                .font(.caption2)
+                                .font(.sxswDetailSmall)
                                 .fontWeight(.bold)
                                 .foregroundStyle(.red)
                         }
@@ -123,7 +123,7 @@ struct VenueDetailSheet: View {
                 viewModel.openInMaps(venue)
             } label: {
                 Label("Open in Maps", systemImage: "arrow.triangle.turn.up.right.circle.fill")
-                    .font(.subheadline)
+                    .font(.sxswBodyDefault)
                     .fontWeight(.medium)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 8)

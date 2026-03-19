@@ -43,10 +43,10 @@ struct RecommendationsView: View {
 
                         HStack(spacing: 6) {
                             Image(systemName: "sparkles")
-                                .font(.caption2)
+                                .font(.sxswDetailSmall)
                                 .foregroundStyle(.sxswOrange)
                             Text(rec.reason)
-                                .font(.caption)
+                                .font(.sxswDetail)
                                 .foregroundStyle(.secondary)
                                 .italic()
                         }
@@ -56,7 +56,7 @@ struct RecommendationsView: View {
                             ForEach(0..<5) { index in
                                 Image(systemName: index < Int(rec.score * 5)
                                       ? "star.fill" : "star")
-                                    .font(.caption2)
+                                    .font(.sxswDetailSmall)
                                     .foregroundStyle(.sxswOrange)
                             }
                         }

@@ -12,7 +12,7 @@ struct EventCardView: View {
 
                 if event.isFeatured {
                     Image(systemName: "star.fill")
-                        .font(.caption2)
+                        .font(.sxswDetailSmall)
                         .foregroundStyle(.yellow)
                 }
 
@@ -22,7 +22,7 @@ struct EventCardView: View {
                             .fill(.red)
                             .frame(width: 6, height: 6)
                         Text("LIVE")
-                            .font(.caption2)
+                            .font(.sxswDetailSmall)
                             .fontWeight(.bold)
                             .foregroundStyle(.red)
                     }
@@ -31,22 +31,22 @@ struct EventCardView: View {
                 Spacer()
 
                 Text(event.eventType.displayName)
-                    .font(.caption2)
+                    .font(.sxswDetailSmall)
                     .foregroundStyle(.secondary)
             }
 
             Text(event.title)
-                .font(.headline)
+                .font(.sxswHeadlineDefault)
                 .lineLimit(2)
 
             HStack(spacing: 12) {
                 Label(event.formattedTimeRange, systemImage: "clock")
-                    .font(.caption)
+                    .font(.sxswDetail)
                     .foregroundStyle(.secondary)
 
                 if let venue = event.venue {
                     Label(venue.name, systemImage: "mappin")
-                        .font(.caption)
+                        .font(.sxswDetail)
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
                 }
@@ -54,7 +54,7 @@ struct EventCardView: View {
 
             if event.isCancelled {
                 Text("CANCELLED")
-                    .font(.caption2)
+                    .font(.sxswDetailSmall)
                     .fontWeight(.bold)
                     .foregroundStyle(.white)
                     .padding(.horizontal, 8)

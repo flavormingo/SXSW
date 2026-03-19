@@ -9,14 +9,14 @@ struct ErrorView: View {
             Spacer()
 
             Image(systemName: "exclamationmark.triangle")
-                .font(.system(size: 48))
+                .font(.sxswHeadline(48))
                 .foregroundStyle(.secondary)
 
             Text("Something went wrong")
-                .font(.headline)
+                .font(.sxswHeadlineDefault)
 
             Text(message)
-                .font(.subheadline)
+                .font(.sxswBodyDefault)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 32)

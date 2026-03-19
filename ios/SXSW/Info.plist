@@ -15,6 +15,12 @@
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>SXSW uses your location to show nearby venues and provide directions.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Fonts/FoundersGroteskText-Regular.otf</string>
+		<string>Fonts/FoundersGroteskCondensed-Bold.otf</string>
+		<string>Fonts/FoundersGroteskMono-Regular.otf</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

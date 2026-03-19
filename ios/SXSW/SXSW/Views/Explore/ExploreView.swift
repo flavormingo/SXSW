@@ -23,8 +23,7 @@ struct ExploreView: View {
                         if !featuredEvents.isEmpty {
                             VStack(alignment: .leading, spacing: 12) {
                                 Text("Featured")
-                                    .font(.title2)
-                                    .fontWeight(.bold)
+                                    .font(.sxswTitle2)
                                     .padding(.horizontal)
 
                                 ScrollView(.horizontal, showsIndicators: false) {
@@ -45,8 +44,7 @@ struct ExploreView: View {
                         if !tracks.isEmpty {
                             VStack(alignment: .leading, spacing: 12) {
                                 Text("Explore by Track")
-                                    .font(.title2)
-                                    .fontWeight(.bold)
+                                    .font(.sxswTitle2)
                                     .padding(.horizontal)
 
                                 LazyVGrid(
@@ -150,7 +148,7 @@ struct FeaturedEventCard: View {
                         VStack(alignment: .leading) {
                             if let track = event.track {
                                 Text(track.name.uppercased())
-                                    .font(.caption2)
+                                    .font(.sxswDetailSmall)
                                     .fontWeight(.bold)
                                     .foregroundStyle(.white.opacity(0.8))
                             }
@@ -161,17 +159,17 @@ struct FeaturedEventCard: View {
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(event.title)
-                    .font(.subheadline)
+                    .font(.sxswBodyDefault)
                     .fontWeight(.semibold)
                     .lineLimit(2)
 
                 Text(event.formattedTimeRange)
-                    .font(.caption)
+                    .font(.sxswDetail)
                     .foregroundStyle(.secondary)
 
                 if let venue = event.venue {
                     Text(venue.name)
-                        .font(.caption)
+                        .font(.sxswDetail)
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
                 }
@@ -188,12 +186,12 @@ struct TrackCard: View {
         VStack(alignment: .leading, spacing: 8) {
             if let icon = track.icon {
                 Image(systemName: icon)
-                    .font(.title2)
+                    .font(.sxswTitle2)
                     .foregroundStyle(.white)
             }
 
             Text(track.name)
-                .font(.subheadline)
+                .font(.sxswBodyDefault)
                 .fontWeight(.semibold)
                 .foregroundStyle(.white)
         }

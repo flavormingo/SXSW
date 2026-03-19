@@ -10,14 +10,14 @@ struct EmptyStateView: View {
             Spacer()
 
             Image(systemName: icon)
-                .font(.system(size: 48))
+                .font(.sxswHeadline(48))
                 .foregroundStyle(.secondary)
 
             Text(title)
-                .font(.headline)
+                .font(.sxswHeadlineDefault)
 
             Text(message)
-                .font(.subheadline)
+                .font(.sxswBodyDefault)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 32)

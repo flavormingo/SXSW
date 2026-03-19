@@ -9,7 +9,7 @@ struct LoadingView: View {
             ProgressView()
                 .controlSize(.large)
             Text(message)
-                .font(.subheadline)
+                .font(.sxswBodyDefault)
                 .foregroundStyle(.secondary)
             Spacer()
         }

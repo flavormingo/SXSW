@@ -110,8 +110,18 @@ final class AuthViewModel {
         email = ""
     }
 
+    var isGuestMode = false
+
+    func skipAuth() {
+        isGuestMode = true
+    }
+
     var isAuthenticated: Bool {
         if case .authenticated = state { return true }
         return false
+    }
+
+    var shouldShowMainApp: Bool {
+        isAuthenticated || isGuestMode
     }
 }

@@ -100,11 +100,10 @@ struct DayPill: View {
         Button(action: action) {
             VStack(spacing: 2) {
                 Text(shortDay)
-                    .font(.caption2)
+                    .font(.sxswDetailSmall)
                     .fontWeight(.medium)
                 Text(dayNumber)
-                    .font(.headline)
-                    .fontWeight(.bold)
+                    .font(.sxswHeadlineDefault)
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
@@ -148,10 +147,10 @@ struct ScheduleItemRow: View {
             // Time column
             VStack(alignment: .trailing, spacing: 2) {
                 Text(startTimeString)
-                    .font(.subheadline)
+                    .font(.sxswDetail)
                     .fontWeight(.semibold)
                 Text(endTimeString)
-                    .font(.caption)
+                    .font(.sxswDetailSmall)
                     .foregroundStyle(.secondary)
             }
             .frame(width: 60, alignment: .trailing)
@@ -163,13 +162,13 @@ struct ScheduleItemRow: View {
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(event.title)
-                    .font(.subheadline)
+                    .font(.sxswBodyDefault)
                     .fontWeight(.medium)
                     .lineLimit(2)
 
                 if let venue = event.venue {
                     Label(venue.name, systemImage: "mappin")
-                        .font(.caption)
+                        .font(.sxswDetail)
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
                 }
@@ -180,7 +179,7 @@ struct ScheduleItemRow: View {
                             .fill(.red)
                             .frame(width: 6, height: 6)
                         Text("LIVE NOW")
-                            .font(.caption2)
+                            .font(.sxswDetailSmall)
                             .fontWeight(.bold)
                             .foregroundStyle(.red)
                     }
@@ -191,7 +190,7 @@ struct ScheduleItemRow: View {
 
             if hasConflict {
                 Image(systemName: "exclamationmark.triangle.fill")
-                    .font(.caption)
+                    .font(.sxswDetail)
                     .foregroundStyle(.orange)
             }
         }

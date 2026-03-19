@@ -6,7 +6,7 @@ struct TrackBadge: View {
 
     var body: some View {
         Text(name)
-            .font(.caption2)
+            .font(.sxswDetailSmall)
             .fontWeight(.semibold)
             .foregroundStyle(.white)
             .padding(.horizontal, 8)

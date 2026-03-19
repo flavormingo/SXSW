@@ -63,7 +63,7 @@ struct EventDetailView: View {
                         .frame(height: 200)
                         .overlay {
                             Image(systemName: "photo")
-                                .font(.largeTitle)
+                                .font(.sxswLargeTitle)
                                 .foregroundStyle(.tertiary)
                         }
                 }
@@ -76,33 +76,32 @@ struct EventDetailView: View {
                         TrackBadge(name: track.name, color: Color(hex: track.color ?? "888888"))
                     }
                     Text(event.eventType.displayName)
-                        .font(.caption)
+                        .font(.sxswDetail)
                         .foregroundStyle(.secondary)
                     Spacer()
                     if event.isFeatured {
                         Label("Featured", systemImage: "star.fill")
-                            .font(.caption)
+                            .font(.sxswDetail)
                             .foregroundStyle(.yellow)
                     }
                 }
 
                 // Title
                 Text(event.title)
-                    .font(.title2)
-                    .fontWeight(.bold)
+                    .font(.sxswTitle2)
 
                 // Time & Venue
                 VStack(alignment: .leading, spacing: 8) {
                     Label(event.formattedTimeRange, systemImage: "clock")
-                        .font(.subheadline)
+                        .font(.sxswDetailLarge)
                     Label(event.formattedDay, systemImage: "calendar")
-                        .font(.subheadline)
+                        .font(.sxswDetailLarge)
                     if let venue = event.venue {
                         Label(venue.name, systemImage: "mappin.circle")
-                            .font(.subheadline)
+                            .font(.sxswDetailLarge)
                         if let address = venue.address {
                             Text(address)
-                                .font(.caption)
+                                .font(.sxswDetail)
                                 .foregroundStyle(.secondary)
                                 .padding(.leading, 28)
                         }
@@ -112,7 +111,7 @@ struct EventDetailView: View {
                 // Description
                 if let description = event.description {
                     Text(description)
-                        .font(.body)
+                        .font(.sxswBodyDefault)
                         .foregroundStyle(.secondary)
                 }
 
@@ -120,7 +119,7 @@ struct EventDetailView: View {
                 if let speakers = event.speakers, !speakers.isEmpty {
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Speakers")
-                            .font(.headline)
+                            .font(.sxswHeadlineDefault)
 
                         ForEach(speakers) { speaker in
                             HStack(spacing: 12) {
@@ -141,11 +140,11 @@ struct EventDetailView: View {
 
                                 VStack(alignment: .leading) {
                                     Text(speaker.name)
-                                        .font(.subheadline)
+                                        .font(.sxswBodyDefault)
                                         .fontWeight(.medium)
                                     if let title = speaker.title {
                                         Text(title)
-                                            .font(.caption)
+                                            .font(.sxswDetail)
                                             .foregroundStyle(.secondary)
                                     }
                                 }

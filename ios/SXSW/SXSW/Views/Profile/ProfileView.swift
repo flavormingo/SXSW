@@ -29,9 +29,9 @@ struct ProfileView: View {
 
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(user.name ?? "SXSW Attendee")
-                                    .font(.headline)
+                                    .font(.sxswHeadlineDefault)
                                 Text(user.email)
-                                    .font(.caption)
+                                    .font(.sxswDetail)
                                     .foregroundStyle(.secondary)
                             }
                         }

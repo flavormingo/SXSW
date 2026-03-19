@@ -6,18 +6,18 @@ struct ConflictBannerView: View {
     var body: some View {
         HStack(spacing: 8) {
             Image(systemName: "exclamationmark.triangle.fill")
-                .font(.subheadline)
+                .font(.sxswBodyDefault)
 
             Text(count == 1
                  ? "1 schedule conflict"
                  : "\(count) schedule conflicts")
-                .font(.subheadline)
+                .font(.sxswBodyDefault)
                 .fontWeight(.medium)
 
             Spacer()
 
             Image(systemName: "chevron.right")
-                .font(.caption)
+                .font(.sxswDetail)
         }
         .foregroundStyle(.white)
         .padding(.horizontal, 16)
