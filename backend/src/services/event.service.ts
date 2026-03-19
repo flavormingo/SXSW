@@ -21,7 +21,7 @@ export async function listEvents(filters: EventFilters, pagination: PaginationPa
   if (filters.trackId) conditions.push(eq(events.trackId, filters.trackId))
   if (filters.venueId) conditions.push(eq(events.venueId, filters.venueId))
   if (filters.day) conditions.push(eq(events.day, filters.day))
-  if (filters.eventType) conditions.push(eq(events.eventType, filters.eventType))
+  if (filters.eventType) conditions.push(eq(events.eventType, filters.eventType as typeof events.eventType.enumValues[number]))
   if (filters.isFeatured) conditions.push(eq(events.isFeatured, true))
   if (filters.startAfter) conditions.push(gte(events.startTime, filters.startAfter))
   if (filters.startBefore) conditions.push(lte(events.startTime, filters.startBefore))

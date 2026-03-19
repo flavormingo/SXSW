@@ -6,7 +6,7 @@ import { createChildLogger } from '@/lib/logger'
 
 const log = createChildLogger('notifications')
 
-export async function registerPushToken(userId: string, token: string, platform = 'ios') {
+export async function registerPushToken(userId: string, token: string, platform: 'ios' | 'android' = 'ios') {
   await db
     .insert(devicePushTokens)
     .values({ userId, token, platform })
