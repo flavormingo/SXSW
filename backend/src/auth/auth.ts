@@ -11,6 +11,7 @@ const log = createChildLogger('auth')
 export const auth = betterAuth({
   database: drizzleAdapter(db, { provider: 'pg' }),
   baseURL: env.BETTER_AUTH_URL,
+  basePath: '/api/auth',
   secret: env.BETTER_AUTH_SECRET,
 
   emailAndPassword: {

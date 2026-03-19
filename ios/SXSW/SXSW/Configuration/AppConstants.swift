@@ -4,13 +4,7 @@ import CoreLocation
 enum AppConstants {
     // MARK: - API
 
-    static var apiBaseURL: String {
-        #if DEBUG
-        return "http://localhost:3000"
-        #else
-        return "https://api.sxsw.pizza"
-        #endif
-    }
+    static let apiBaseURL = "https://api.sxsw.pizza"
 
     // MARK: - App
 

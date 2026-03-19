@@ -1,10 +1,10 @@
 import { Hono } from 'hono'
 import { auth } from '@/auth/auth'
 
-// BetterAuth handles all /api/auth/* routes automatically
 const authRoutes = new Hono()
 
-authRoutes.all('/auth/*', (c) => {
+// BetterAuth needs the full path — mount at wildcard and pass raw request
+authRoutes.all('/*', (c) => {
   return auth.handler(c.req.raw)
 })
 

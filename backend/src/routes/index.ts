@@ -12,7 +12,7 @@ import { userRoutes } from './user.routes'
 import { adminRoutes } from './admin.routes'
 
 export function mountRoutes(app: Hono) {
-  app.route('/api', authRoutes)
+  app.route('/api/auth', authRoutes)
   app.route('/api/events', eventRoutes)
   app.route('/api/schedule', scheduleRoutes)
   app.route('/api/favorites', favoritesRoutes)

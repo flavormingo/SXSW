@@ -1,7 +1,8 @@
 import Foundation
 import UIKit
 
-actor AnalyticsService {
+@MainActor
+final class AnalyticsService {
     static let shared = AnalyticsService()
 
     private var buffer: [[String: Any]] = []
@@ -24,7 +25,7 @@ actor AnalyticsService {
     }
 
     func track(eventName: String, properties: [String: Any] = [:]) {
-        var eventData: [String: Any] = [
+        let eventData: [String: Any] = [
             "event": eventName,
             "properties": properties,
             "deviceId": deviceId,

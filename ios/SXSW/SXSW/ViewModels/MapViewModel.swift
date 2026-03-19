@@ -52,7 +52,11 @@ final class MapViewModel {
     }
 
     func openInMaps(_ venue: Venue) {
-        let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: venue.coordinate))
+        let coordinate = venue.coordinate
+        let mapItem = MKMapItem(
+            location: CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude),
+            address: nil
+        )
         mapItem.name = venue.name
         mapItem.openInMaps(launchOptions: [
             MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking

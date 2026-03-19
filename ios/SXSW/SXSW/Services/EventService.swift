@@ -1,6 +1,7 @@
 import Foundation
 
-actor EventService {
+@MainActor
+final class EventService {
     static let shared = EventService()
 
     private let client = APIClient.shared
@@ -13,7 +14,7 @@ actor EventService {
         venueId: String? = nil,
         eventType: EventType? = nil,
         cursor: String? = nil,
-        limit: Int = AppConstants.pageSize
+        limit: Int = 20
     ) async throws -> APIResponse<[Event]> {
         let params = EventQueryParams(
             day: day,
