@@ -1,6 +1,7 @@
 import Foundation
 
-actor AuthService {
+@MainActor
+final class AuthService {
     static let shared = AuthService()
 
     private let client = APIClient.shared
@@ -10,6 +11,12 @@ actor AuthService {
     private struct MagicLinkResponse: Codable {
         let status: Bool?
         let success: Bool?
+    }
+
+    struct PollSessionResponse: Codable {
+        let authenticated: Bool
+        let token: String?
+        let user: User?
     }
 
     func requestMagicLink(email: String) async throws {
@@ -28,13 +35,17 @@ actor AuthService {
             .verifyMagicLink(token: token)
         )
 
-        await client.setAuthToken(response.token)
+        client.setAuthToken(response.token)
         return response.user
+    }
+
+    func pollSession(email: String) async throws -> PollSessionResponse {
+        try await client.request(.pollSession(email: email))
     }
 
     func logout() async throws {
         let _: SuccessResponse = try await client.request(.logout)
-        await client.clearAuthToken()
+        client.clearAuthToken()
     }
 
     func getCurrentUser() async throws -> User {

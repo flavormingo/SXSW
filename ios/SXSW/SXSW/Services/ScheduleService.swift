@@ -1,6 +1,7 @@
 import Foundation
 
-actor ScheduleService {
+@MainActor
+final class ScheduleService {
     static let shared = ScheduleService()
 
     private let client = APIClient.shared

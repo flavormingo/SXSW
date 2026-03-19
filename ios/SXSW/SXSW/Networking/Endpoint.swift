@@ -21,6 +21,7 @@ enum Endpoint {
     // Auth
     case magicLink(email: String)
     case verifyMagicLink(token: String)
+    case pollSession(email: String)
     case logout
 
     // Events
@@ -67,6 +68,8 @@ enum Endpoint {
             return "/api/auth/sign-in/magic-link"
         case .verifyMagicLink:
             return "/api/auth/magic-link/verify"
+        case .pollSession:
+            return "/api/auth/poll-session"
         case .logout:
             return "/api/auth/sign-out"
         case .events:
@@ -114,7 +117,7 @@ enum Endpoint {
 
     var method: HTTPMethod {
         switch self {
-        case .magicLink, .verifyMagicLink, .addToSchedule, .addFavorite,
+        case .magicLink, .verifyMagicLink, .pollSession, .addToSchedule, .addFavorite,
              .registerPushToken, .trackAnalytics:
             return .POST
         case .logout:
@@ -157,6 +160,8 @@ enum Endpoint {
             return try? JSONEncoder().encode(["email": email])
         case .verifyMagicLink(let token):
             return try? JSONEncoder().encode(["token": token])
+        case .pollSession(let email):
+            return try? JSONEncoder().encode(["email": email])
         case .addToSchedule(let eventId, let forceAdd):
             return try? JSONSerialization.data(withJSONObject: [
                 "eventId": eventId,

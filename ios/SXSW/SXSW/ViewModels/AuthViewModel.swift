@@ -16,6 +16,7 @@ final class AuthViewModel {
     var currentUser: User?
 
     private let authService = AuthService.shared
+    private var pollingTask: Task<Void, Never>?
 
     func sendMagicLink() async {
         guard !email.isEmpty else {
@@ -27,12 +28,15 @@ final class AuthViewModel {
         do {
             try await authService.requestMagicLink(email: email)
             state = .linkSent(email: email)
+            startPolling()
         } catch {
             state = .error(error.localizedDescription)
         }
     }
 
+    /// Happy path: deep link opens app with token
     func verifyToken(_ token: String) async {
+        stopPolling()
         state = .verifying
         do {
             let user = try await authService.verifyMagicLink(token: token)
@@ -41,6 +45,40 @@ final class AuthViewModel {
         } catch {
             state = .error("Verification failed: \(error.localizedDescription)")
         }
+    }
+
+    /// Fallback: poll the server to check if session was created (e.g. verified in browser)
+    private func startPolling() {
+        stopPolling()
+        let emailToCheck = email
+        pollingTask = Task {
+            // Wait a few seconds before first poll
+            try? await Task.sleep(for: .seconds(3))
+
+            while !Task.isCancelled {
+                // Only poll while we're on the linkSent screen
+                guard case .linkSent = state else { return }
+
+                do {
+                    let response = try await authService.pollSession(email: emailToCheck)
+                    if response.authenticated, let token = response.token, let user = response.user {
+                        APIClient.shared.setAuthToken(token)
+                        currentUser = user
+                        state = .authenticated(user)
+                        return
+                    }
+                } catch {
+                    // Not authenticated yet — keep polling
+                }
+
+                try? await Task.sleep(for: .seconds(4))
+            }
+        }
+    }
+
+    private func stopPolling() {
+        pollingTask?.cancel()
+        pollingTask = nil
     }
 
     func checkSession() async {
@@ -59,13 +97,14 @@ final class AuthViewModel {
     }
 
     func logout() async {
+        stopPolling()
         do {
             try await authService.logout()
         } catch {
             print("[Auth] Logout API call failed: \(error)")
         }
 
-        await APIClient.shared.clearAuthToken()
+        APIClient.shared.clearAuthToken()
         currentUser = nil
         state = .idle
         email = ""

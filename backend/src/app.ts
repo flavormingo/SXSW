@@ -1,9 +1,12 @@
 import { Hono } from 'hono'
+import { eq, desc } from 'drizzle-orm'
 import { corsMiddleware } from '@/middleware/cors'
 import { requestId } from '@/middleware/request-id'
 import { requestLogger } from '@/middleware/logger'
 import { errorHandler } from '@/middleware/error-handler'
 import { mountRoutes } from '@/routes'
+import { db } from '@/db/client'
+import { users, sessions } from '@/db/schema'
 
 const app = new Hono()
 
@@ -47,6 +50,46 @@ app.get('/api/auth/auth-complete', (c) => {
     </body>
     </html>
   `)
+})
+
+// Poll session — app calls this after sending magic link to check if user verified
+app.post('/api/auth/poll-session', async (c) => {
+  const body = await c.req.json<{ email: string }>()
+  if (!body.email) return c.json({ authenticated: false }, 200)
+
+  // Find user by email
+  const user = await db
+    .select()
+    .from(users)
+    .where(eq(users.email, body.email))
+    .limit(1)
+
+  if (!user[0]) return c.json({ authenticated: false }, 200)
+
+  // Find their most recent active session
+  const session = await db
+    .select()
+    .from(sessions)
+    .where(eq(sessions.userId, user[0].id))
+    .orderBy(desc(sessions.createdAt))
+    .limit(1)
+
+  if (!session[0] || session[0].expiresAt < new Date()) {
+    return c.json({ authenticated: false }, 200)
+  }
+
+  return c.json({
+    authenticated: true,
+    token: session[0].token,
+    user: {
+      id: user[0].id,
+      email: user[0].email,
+      name: user[0].name,
+      avatarUrl: user[0].avatarUrl,
+      role: user[0].role,
+      createdAt: user[0].createdAt,
+    },
+  })
 })
 
 // Mount all API routes
