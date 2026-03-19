@@ -7,8 +7,13 @@ actor AuthService {
 
     private init() {}
 
+    private struct MagicLinkResponse: Codable {
+        let status: Bool?
+        let success: Bool?
+    }
+
     func requestMagicLink(email: String) async throws {
-        let _: SuccessResponse = try await client.request(
+        let _: MagicLinkResponse = try await client.request(
             .magicLink(email: email)
         )
     }
