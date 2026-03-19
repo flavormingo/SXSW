@@ -64,11 +64,11 @@ enum Endpoint {
     var path: String {
         switch self {
         case .magicLink:
-            return "/api/auth/magic-link"
+            return "/api/auth/sign-in/magic-link"
         case .verifyMagicLink:
-            return "/api/auth/verify"
+            return "/api/auth/magic-link/verify"
         case .logout:
-            return "/api/auth/logout"
+            return "/api/auth/sign-out"
         case .events:
             return "/api/events"
         case .eventDetail(let id):

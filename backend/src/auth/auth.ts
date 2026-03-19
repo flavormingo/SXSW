@@ -2,6 +2,7 @@ import { betterAuth } from 'better-auth'
 import { magicLink } from 'better-auth/plugins'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { db } from '@/db/client'
+import * as schema from '@/db/schema'
 import { env } from '@/env'
 import { resend } from '@/lib/resend'
 import { createChildLogger } from '@/lib/logger'
@@ -9,7 +10,7 @@ import { createChildLogger } from '@/lib/logger'
 const log = createChildLogger('auth')
 
 export const auth = betterAuth({
-  database: drizzleAdapter(db, { provider: 'pg' }),
+  database: drizzleAdapter(db, { provider: 'pg', schema }),
   baseURL: env.BETTER_AUTH_URL,
   basePath: '/api/auth',
   secret: env.BETTER_AUTH_SECRET,
